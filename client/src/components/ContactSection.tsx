@@ -161,8 +161,8 @@ export default function ContactSection() {
               ))}
             </div>
 
-            {/* Socials */}
-            <div className="neon-card rounded-2xl p-6">
+            {/* Socials — oculto temporalmente */}
+            {/* <div className="neon-card rounded-2xl p-6">
               <h3
                 className="text-white font-bold text-sm mb-4"
                 style={{ fontFamily: "'Inter', sans-serif" }}
@@ -186,7 +186,7 @@ export default function ContactSection() {
                   </a>
                 ))}
               </div>
-            </div>
+            </div> */}
           </motion.div>
 
           {/* Right: Form */}
