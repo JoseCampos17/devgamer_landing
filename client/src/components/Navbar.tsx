@@ -55,11 +55,12 @@ export default function Navbar() {
         }`}
       >
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+          <div className="flex items-center justify-between h-16 lg:h-20" role="navigation">
             {/* Logo */}
             <button
               onClick={() => handleNavClick("#hero")}
               className="flex items-center gap-2 group"
+              aria-label="Ir al inicio"
             >
               <div className="relative w-9 h-9 flex items-center justify-center">
                 <div className="absolute inset-0 bg-violet-600/20 rounded-lg border border-violet-500/40 group-hover:border-cyan-400/60 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.3)]" />
@@ -82,13 +83,15 @@ export default function Navbar() {
             </button>
 
             {/* Desktop Links */}
-            <div className="hidden lg:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-1" role="menubar">
               {navLinksKeys.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => handleNavClick(link.href)}
                   className="relative px-4 py-2 text-sm text-slate-300 hover:text-white transition-colors duration-200 group"
                   style={{ fontFamily: "'Inter', sans-serif" }}
+                  role="menuitem"
+                  aria-label={`Ir a ${t(link.labelKey)}`}
                 >
                   <span className="relative z-10">{t(link.labelKey)}</span>
                   <span className="absolute inset-0 rounded-md bg-violet-600/0 group-hover:bg-violet-600/10 transition-all duration-200" />
@@ -104,6 +107,9 @@ export default function Navbar() {
                 <button
                   onClick={() => setLangMenuOpen(!langMenuOpen)}
                   className="hidden sm:flex items-center gap-1 px-3 py-2 rounded-md border border-violet-500/30 text-slate-300 hover:text-white hover:border-violet-400/60 transition-all duration-200 text-xs font-medium"
+                  aria-label="Cambiar idioma"
+                  aria-expanded={langMenuOpen}
+                  aria-haspopup="true"
                 >
                   <Globe className="w-3.5 h-3.5" />
                   {language.toUpperCase()}
@@ -116,6 +122,7 @@ export default function Navbar() {
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.15 }}
                       className="absolute top-full right-0 mt-2 bg-[#070b14] border border-violet-500/30 rounded-md overflow-hidden z-50"
+                      role="menu"
                     >
                       <button
                         onClick={() => {
@@ -127,6 +134,7 @@ export default function Navbar() {
                             ? "bg-violet-600/20 text-violet-300"
                             : "text-slate-300 hover:text-white hover:bg-violet-600/10"
                         }`}
+                        role="menuitem"
                       >
                         Español
                       </button>
@@ -140,6 +148,7 @@ export default function Navbar() {
                             ? "bg-violet-600/20 text-violet-300"
                             : "text-slate-300 hover:text-white hover:bg-violet-600/10"
                         }`}
+                        role="menuitem"
                       >
                         English
                       </button>
@@ -150,6 +159,7 @@ export default function Navbar() {
               <button
                 onClick={() => handleNavClick("#contacto")}
                 className="hidden sm:flex items-center gap-2 px-5 py-2 rounded-md btn-gold text-xs font-bold"
+                aria-label="Cotizar un proyecto"
               >
                 <Code2 className="w-3.5 h-3.5" />
                 {t("nav.cotizar")}
@@ -157,6 +167,8 @@ export default function Navbar() {
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className="lg:hidden p-2 rounded-md border border-violet-500/30 text-slate-300 hover:text-white hover:border-violet-400/60 transition-all duration-200"
+                aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+                aria-expanded={mobileOpen}
               >
                 {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
