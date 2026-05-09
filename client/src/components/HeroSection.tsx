@@ -28,8 +28,8 @@ export default function HeroSection() {
   ];
 
   const stats = [
-    { value: "50+", labelKey: "hero.stat1", icon: Code2, color: "text-violet-400" },
-    { value: "30+", labelKey: "hero.stat2", icon: Users, color: "text-cyan-400" },
+    { value: "15+", labelKey: "hero.stat1", icon: Code2, color: "text-violet-400" },
+    { value: "10+", labelKey: "hero.stat2", icon: Users, color: "text-cyan-400" },
     { value: "5★", label: "Rating", icon: Star, color: "text-amber-400" },
     { value: "24/7", label: "Support", icon: Zap, color: "text-emerald-400" },
   ];
