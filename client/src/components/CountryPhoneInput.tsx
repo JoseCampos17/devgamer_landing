@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
-import "flag-icons/css/flag-icons.min.css";
 
 export interface Country {
   code: string;
@@ -10,28 +9,28 @@ export interface Country {
 }
 
 const countries: Country[] = [
-  { code: "US", name: "United States", flag: "fi-us", dialCode: "+1" },
-  { code: "MX", name: "México", flag: "fi-mx", dialCode: "+52" },
-  { code: "CO", name: "Colombia", flag: "fi-co", dialCode: "+57" },
-  { code: "AR", name: "Argentina", flag: "fi-ar", dialCode: "+54" },
-  { code: "BR", name: "Brasil", flag: "fi-br", dialCode: "+55" },
-  { code: "CL", name: "Chile", flag: "fi-cl", dialCode: "+56" },
-  { code: "PE", name: "Perú", flag: "fi-pe", dialCode: "+51" },
-  { code: "VE", name: "Venezuela", flag: "fi-ve", dialCode: "+58" },
-  { code: "EC", name: "Ecuador", flag: "fi-ec", dialCode: "+593" },
-  { code: "BO", name: "Bolivia", flag: "fi-bo", dialCode: "+591" },
-  { code: "PY", name: "Paraguay", flag: "fi-py", dialCode: "+595" },
-  { code: "UY", name: "Uruguay", flag: "fi-uy", dialCode: "+598" },
-  { code: "ES", name: "España", flag: "fi-es", dialCode: "+34" },
-  { code: "GB", name: "United Kingdom", flag: "fi-gb", dialCode: "+44" },
-  { code: "DE", name: "Deutschland", flag: "fi-de", dialCode: "+49" },
-  { code: "FR", name: "France", flag: "fi-fr", dialCode: "+33" },
-  { code: "IT", name: "Italia", flag: "fi-it", dialCode: "+39" },
-  { code: "CA", name: "Canada", flag: "fi-ca", dialCode: "+1" },
-  { code: "AU", name: "Australia", flag: "fi-au", dialCode: "+61" },
-  { code: "JP", name: "日本", flag: "fi-jp", dialCode: "+81" },
-  { code: "CN", name: "中国", flag: "fi-cn", dialCode: "+86" },
-  { code: "IN", name: "India", flag: "fi-in", dialCode: "+91" },
+  { code: "US", name: "United States", flag: "🇺🇸", dialCode: "+1" },
+  { code: "MX", name: "México", flag: "🇲🇽", dialCode: "+52" },
+  { code: "CO", name: "Colombia", flag: "🇨🇴", dialCode: "+57" },
+  { code: "AR", name: "Argentina", flag: "🇦🇷", dialCode: "+54" },
+  { code: "BR", name: "Brasil", flag: "🇧🇷", dialCode: "+55" },
+  { code: "CL", name: "Chile", flag: "🇨🇱", dialCode: "+56" },
+  { code: "PE", name: "Perú", flag: "🇵🇪", dialCode: "+51" },
+  { code: "VE", name: "Venezuela", flag: "🇻🇪", dialCode: "+58" },
+  { code: "EC", name: "Ecuador", flag: "🇪🇨", dialCode: "+593" },
+  { code: "BO", name: "Bolivia", flag: "🇧🇴", dialCode: "+591" },
+  { code: "PY", name: "Paraguay", flag: "🇵🇾", dialCode: "+595" },
+  { code: "UY", name: "Uruguay", flag: "🇺🇾", dialCode: "+598" },
+  { code: "ES", name: "España", flag: "🇪🇸", dialCode: "+34" },
+  { code: "GB", name: "United Kingdom", flag: "🇬🇧", dialCode: "+44" },
+  { code: "DE", name: "Deutschland", flag: "🇩🇪", dialCode: "+49" },
+  { code: "FR", name: "France", flag: "🇫🇷", dialCode: "+33" },
+  { code: "IT", name: "Italia", flag: "🇮🇹", dialCode: "+39" },
+  { code: "CA", name: "Canada", flag: "🇨🇦", dialCode: "+1" },
+  { code: "AU", name: "Australia", flag: "🇦🇺", dialCode: "+61" },
+  { code: "JP", name: "日本", flag: "🇯🇵", dialCode: "+81" },
+  { code: "CN", name: "中国", flag: "🇨🇳", dialCode: "+86" },
+  { code: "IN", name: "India", flag: "🇮🇳", dialCode: "+91" },
 ];
 
 interface CountryPhoneInputProps {
@@ -87,7 +86,7 @@ export default function CountryPhoneInput({
           onClick={() => setIsOpen(!isOpen)}
           className="w-full px-3 py-2 rounded-md border border-slate-600/40 bg-slate-900/50 text-white hover:border-violet-500/60 transition-all duration-200 flex items-center justify-between gap-2 text-sm"
         >
-          <span className={`fi ${selectedCountry.flag}`} style={{ width: '1.2em', height: '0.9em' }}></span>
+          <span className="text-base leading-none">{selectedCountry.flag}</span>
           <span className="text-xs font-medium">{selectedCountry.dialCode}</span>
           <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
         </button>
@@ -115,7 +114,7 @@ export default function CountryPhoneInput({
                       : "text-slate-300 hover:bg-violet-600/10 hover:text-white"
                     }`}
                 >
-                  <span className={`fi ${country.flag}`} style={{ width: '1.2em', height: '0.9em' }}></span>
+                  <span className="text-base leading-none">{country.flag}</span>
                   <span className="text-slate-500 font-medium">{country.dialCode}</span>
                 </button>
               ))}

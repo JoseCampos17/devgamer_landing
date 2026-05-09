@@ -136,17 +136,11 @@ export default function Footer() {
             className="text-slate-600 text-xs flex items-center gap-1.5"
             style={{ fontFamily: "'JetBrains Mono', monospace" }}
           >
-            © {new Date().getFullYear()} DevGamer Studio. Hecho con
-            <Heart className="w-3 h-3 text-red-500 inline" />
-            y mucho café.
+            © {new Date().getFullYear()} DevGamer Studio.
           </p>
-          <p
-            className="text-slate-700 text-xs flex items-center gap-1.5"
-            style={{ fontFamily: "'JetBrains Mono', monospace" }}
-          >
-            <Code2 className="w-3 h-3" />
-            Powered by React + Framer Motion
-          </p>
+          <div className="flex items-center gap-4">
+            <span className="text-slate-700 text-[10px] uppercase tracking-widest">Premium Digital Solutions</span>
+          </div>
         </div>
       </div>
     </footer>

@@ -164,6 +164,15 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-framer': ['framer-motion'],
+          'vendor-icons': ['lucide-react'],
+          'vendor-ui': ['@radix-ui/react-slot', '@radix-ui/react-toggle', '@radix-ui/react-toggle-group', '@radix-ui/react-tooltip', '@radix-ui/react-tabs', '@radix-ui/react-switch', '@radix-ui/react-slider'],
+        }
+      }
+    }
   },
   server: {
     port: 3000,
