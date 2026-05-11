@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0f1e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1a3a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle grid lines -->
+  <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1">
+    <line x1="0" y1="105" x2="1200" y2="105"/>
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="0" y1="525" x2="1200" y2="525"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- Accent bar top -->
+  <rect width="1200" height="6" fill="url(#accent)"/>
+
+  <!-- Left bracket decoration -->
+  <text x="80" y="380" font-family="monospace" font-size="220" fill="#7c3aed" fill-opacity="0.15" filter="url(#glow)">{</text>
+
+  <!-- Right bracket decoration -->
+  <text x="980" y="380" font-family="monospace" font-size="220" fill="#06b6d4" fill-opacity="0.15" filter="url(#glow)">}</text>
+
+  <!-- Logo icon area -->
+  <circle cx="600" cy="185" r="50" fill="#7c3aed" fill-opacity="0.2" stroke="#7c3aed" stroke-opacity="0.5" stroke-width="2"/>
+  <text x="600" y="200" font-family="monospace" font-size="40" fill="#ffffff" text-anchor="middle" filter="url(#glow)">&lt;/&gt;</text>
+
+  <!-- Main title -->
+  <text x="600" y="300" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="-1">DevGamer Studio</text>
+
+  <!-- Gradient underline -->
+  <rect x="350" y="318" width="500" height="4" rx="2" fill="url(#accent)"/>
+
+  <!-- Subtitle -->
+  <text x="600" y="390" font-family="Arial, sans-serif" font-size="28" fill="#94a3b8" text-anchor="middle" letter-spacing="2">SOFTWARE · LANDING PAGES · GAMING</text>
+
+  <!-- Domain badge -->
+  <rect x="475" y="430" width="250" height="44" rx="22" fill="#7c3aed" fill-opacity="0.2" stroke="#7c3aed" stroke-opacity="0.6" stroke-width="1.5"/>
+  <text x="600" y="459" font-family="monospace" font-size="20" fill="#a78bfa" text-anchor="middle">devgamerpro.com</text>
+
+  <!-- Bottom accent bar -->
+  <rect y="624" width="1200" height="6" fill="url(#accent)"/>
+</svg>
