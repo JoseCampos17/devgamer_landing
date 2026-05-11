@@ -106,6 +106,8 @@
   }
   h1, h2, h3 {
     font-family: 'Orbitron', sans-serif;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
   code, .mono {
     font-family: 'JetBrains Mono', monospace;
