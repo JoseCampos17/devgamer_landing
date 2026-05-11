@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useLocation } from 'wouter';
 import { Lock, Mail, Loader2, ArrowLeft } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext.tsx';
+
 import axios from 'axios';
 
 const API_URL = 'https://back.devgamerpro.com';

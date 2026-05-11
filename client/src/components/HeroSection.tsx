@@ -7,7 +7,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, Zap, Star, Users, Code2, Gamepad2, Monitor } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext.tsx";
+
 
 const HERO_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663640454573/2EqbNsmqhN6YUGgqanCV2e/hero-main-Jn9DJpSE74FtKR5wEcvUVH.webp";
 

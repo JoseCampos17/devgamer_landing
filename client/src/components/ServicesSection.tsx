@@ -7,7 +7,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext.tsx";
+
 import {
   Code2, Layout, Gamepad2, CheckCircle2, ArrowRight,
   Database, Smartphone, Globe, Twitch, Youtube, Mic, Zap

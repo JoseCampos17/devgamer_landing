@@ -183,6 +183,8 @@ export const translations = {
     "podcast.final.title": "Una web propia para escuchar y volver.",
     "podcast.final.description": "Podcast queda separado del área de servicios para que se sienta como un proyecto vivo dentro de DevGamer, no como una sección decorativa.",
     "podcast.back": "Volver a DevGamer Hub",
+    "podcast.listen_on_hero": "Escúchanos en:",
+    "podcast.listen_on": "Escúchanos en tu plataforma favorita",
 
     // Clips Page
     "clips.badge": "DevGamer Clip Arena",
@@ -363,6 +365,8 @@ export const translations = {
     "podcast.final.title": "Your own web to listen and return.",
     "podcast.final.description": "Podcast is separated from the services area so it feels like a live project within DevGamer, not a decorative section.",
     "podcast.back": "Back to DevGamer Hub",
+    "podcast.listen_on_hero": "Listen on:",
+    "podcast.listen_on": "Listen on your favorite platform",
 
     // Clips Page
     "clips.badge": "DevGamer Clip Arena",

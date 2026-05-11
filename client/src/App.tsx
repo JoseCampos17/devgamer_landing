@@ -2,15 +2,15 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
-import ErrorBoundary from "./components/ErrorBoundary";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import Home from "./pages/Home";
-import PodcastPage from "./pages/Podcast";
-import ClipsPage from "./pages/Clips";
-import LoginPage from "./pages/Login";
-import AdminDashboard from "./pages/AdminDashboard";
-import ChatBot from "./components/ChatBot";
-import { AuthProvider } from "./contexts/AuthContext";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import { ThemeProvider } from "@/contexts/ThemeContext.tsx";
+import Home from "@/pages/Home";
+import PodcastPage from "@/pages/Podcast";
+import ClipsPage from "@/pages/Clips";
+import LoginPage from "@/pages/Login";
+import AdminDashboard from "@/pages/AdminDashboard";
+import ChatBot from "@/components/ChatBot";
+import { AuthProvider } from "@/contexts/AuthContext.tsx";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes

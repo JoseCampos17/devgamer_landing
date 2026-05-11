@@ -17,7 +17,8 @@ import {
   Zap,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext.tsx";
+
 
 const clipCards = [
   {

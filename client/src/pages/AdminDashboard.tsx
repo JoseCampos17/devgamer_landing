@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'wouter';
 import { LayoutDashboard, Mic2, Users, Layers, LogOut, Loader2, Plus, AlertCircle, Trash2 } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext.tsx';
+
 import axios from 'axios';
 import { toast } from 'sonner';
 
