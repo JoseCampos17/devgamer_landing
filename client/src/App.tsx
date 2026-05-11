@@ -7,7 +7,10 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import PodcastPage from "./pages/Podcast";
 import ClipsPage from "./pages/Clips";
+import LoginPage from "./pages/Login";
+import AdminDashboard from "./pages/AdminDashboard";
 import ChatBot from "./components/ChatBot";
+import { AuthProvider } from "./contexts/AuthContext";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -16,6 +19,8 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/podcast"} component={PodcastPage} />
       <Route path={"/clips"} component={ClipsPage} />
+      <Route path={"/admin-login"} component={LoginPage} />
+      <Route path={"/admin-dashboard"} component={AdminDashboard} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
@@ -32,14 +37,16 @@ function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider
-        defaultTheme="light"
+        defaultTheme="dark"
         // switchable
       >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-          <ChatBot />
-        </TooltipProvider>
+        <AuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+            <ChatBot />
+          </TooltipProvider>
+        </AuthProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
