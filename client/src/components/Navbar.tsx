@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Gamepad2, Code2, Globe } from "lucide-react";
 import { useLocation } from "wouter";
-import { useLanguage } from "@/contexts/LanguageContext.tsx";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 
 const navLinksKeys = [

@@ -157,7 +157,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useTheme } from "@/contexts/ThemeContext.tsx";
+import { useTheme } from "@/contexts/ThemeContext";
 
 import { format } from "date-fns";
 import { zhCN } from "date-fns/locale";

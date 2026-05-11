@@ -3,14 +3,14 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import { ThemeProvider } from "@/contexts/ThemeContext.tsx";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import Home from "@/pages/Home";
 import PodcastPage from "@/pages/Podcast";
 import ClipsPage from "@/pages/Clips";
 import LoginPage from "@/pages/Login";
 import AdminDashboard from "@/pages/AdminDashboard";
 import ChatBot from "@/components/ChatBot";
-import { AuthProvider } from "@/contexts/AuthContext.tsx";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes

@@ -21,7 +21,7 @@ import {
   Youtube,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import { useLanguage } from "@/contexts/LanguageContext.tsx";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 
 const API_URL = 'https://back.devgamerpro.com';
