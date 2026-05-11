@@ -11,6 +11,8 @@ import LoginPage from "@/pages/Login";
 import AdminDashboard from "@/pages/AdminDashboard";
 import ChatBot from "@/components/ChatBot";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
+
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -36,20 +38,23 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="dark"
-        // switchable
-      >
-        <AuthProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Router />
-            <ChatBot />
-          </TooltipProvider>
-        </AuthProvider>
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider
+          defaultTheme="dark"
+          // switchable
+        >
+          <AuthProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Router />
+              <ChatBot />
+            </TooltipProvider>
+          </AuthProvider>
+        </ThemeProvider>
+      </LanguageProvider>
     </ErrorBoundary>
   );
+
 }
 
 export default App;
