@@ -7,11 +7,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Gamepad2, Code2, Globe } from "lucide-react";
+import { useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const navLinksKeys = [
   { labelKey: "nav.inicio", href: "#hero" },
   { labelKey: "nav.servicios", href: "#servicios" },
+  { labelKey: "Podcast", href: "/podcast", isPage: true },
+  { labelKey: "Clips", href: "/clips", isPage: true },
   { labelKey: "nav.portafolio", href: "#portafolio" },
   { labelKey: "nav.gaming", href: "#gaming" },
   { labelKey: "nav.sobre-mi", href: "#sobre-mi" },
@@ -20,9 +23,9 @@ const navLinksKeys = [
 
 export default function Navbar() {
   const { language, setLanguage, t } = useLanguage();
+  const [location, setLocation] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
   const [langMenuOpen, setLangMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -33,13 +36,29 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
-    setMobileOpen(false);
+  const scrollToSection = (href: string) => {
     const id = href.replace("#", "");
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+  };
+
+  const handleNavClick = (href: string) => {
+    setMobileOpen(false);
+    if (href.startsWith("/")) {
+      setLocation(href);
+      window.setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 50);
+      return;
+    }
+
+    if (location !== "/") {
+      setLocation("/");
+      window.setTimeout(() => scrollToSection(href), 80);
+      return;
+    }
+
+    scrollToSection(href);
   };
 
   return (
@@ -58,7 +77,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 lg:h-20" role="navigation">
             {/* Logo */}
             <button
-              onClick={() => handleNavClick("#hero")}
+              onClick={() => handleNavClick("/")}
               className="flex items-center gap-2 group"
               aria-label="Ir al inicio"
             >
@@ -88,14 +107,14 @@ export default function Navbar() {
                 <button
                   key={link.href}
                   onClick={() => handleNavClick(link.href)}
-                  className="relative px-4 py-2 text-sm text-slate-300 hover:text-white transition-colors duration-200 group"
+                  className="relative px-3 py-2 text-sm text-slate-300 hover:text-white transition-colors duration-200 group"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                   role="menuitem"
                   aria-label={`Ir a ${t(link.labelKey)}`}
                 >
-                  <span className="relative z-10">{t(link.labelKey)}</span>
+                  <span className="relative z-10">{(link as any).isPage ? link.labelKey : t(link.labelKey)}</span>
                   <span className="absolute inset-0 rounded-md bg-violet-600/0 group-hover:bg-violet-600/10 transition-all duration-200" />
-                  <span className="absolute bottom-1 left-4 right-4 h-px bg-gradient-to-r from-violet-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                  <span className="absolute bottom-1 left-3 right-3 h-px bg-gradient-to-r from-violet-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                 </button>
               ))}
             </div>
@@ -198,7 +217,7 @@ export default function Navbar() {
                   className="text-left px-4 py-3 text-slate-300 hover:text-white hover:bg-violet-600/10 rounded-md transition-all duration-200 border border-transparent hover:border-violet-500/20"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
-                  {t(link.labelKey)}
+                  {(link as any).isPage ? link.labelKey : t(link.labelKey)}
                 </motion.button>
               ))}
               <button
