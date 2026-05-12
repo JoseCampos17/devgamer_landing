@@ -16,7 +16,7 @@ interface Stats {
 }
 
 export default function AdminDashboard() {
-  const { user, token, logout, isAuthenticated } = useAuth();
+  const { user, token, logout, isAuthenticated, isLoading: authLoading } = useAuth();
   const [, setLocation] = useLocation();
   const [stats, setStats] = useState<Stats | null>(null);
   const [episodes, setEpisodes] = useState<any[]>([]);
@@ -28,6 +28,7 @@ export default function AdminDashboard() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [episodeToDelete, setEpisodeToDelete] = useState<any>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -46,12 +47,13 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
+    if (authLoading) return; // Esperar a que AuthContext cargue desde localStorage
     if (!isAuthenticated) {
       setLocation('/admin-login');
       return;
     }
     fetchData();
-  }, [isAuthenticated, token, setLocation]);
+  }, [isAuthenticated, authLoading, token, setLocation]);
 
   const handleLogout = () => {
     logout();
@@ -118,7 +120,7 @@ export default function AdminDashboard() {
     }
   };
 
-  if (loading) {
+  if (authLoading || (isAuthenticated && loading)) {
     return (
       <div className="min-h-screen bg-[#070b14] flex items-center justify-center">
         <Loader2 className="h-8 w-8 text-cyan-400 animate-spin" />
@@ -127,7 +129,82 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-[#070b14] text-white flex relative">
+    <div className="min-h-screen bg-[#070b14] text-white flex flex-col relative">
+
+      {/* ── TOPBAR MÓVIL con hamburguesa ── */}
+      <header className="md:hidden sticky top-0 z-50 flex items-center justify-between px-4 py-3 bg-[#0d1526] border-b-2 border-cyan-500/60">
+        <span className="text-cyan-400 font-black tracking-widest text-lg" style={{ fontFamily: "'Orbitron', sans-serif" }}>DEVGAMER</span>
+        <button
+          onClick={() => setMobileOpen(true)}
+          className="flex flex-col justify-center gap-[5px] w-10 h-10 items-center rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/50 transition"
+          aria-label="Abrir menú"
+        >
+          <span className="block w-5 h-0.5 bg-cyan-400 rounded"/>
+          <span className="block w-5 h-0.5 bg-cyan-400 rounded"/>
+          <span className="block w-5 h-0.5 bg-cyan-400 rounded"/>
+        </button>
+      </header>
+
+      {/* ── OVERLAY ── */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[60] md:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
+      {/* ── DRAWER LATERAL MÓVIL ── */}
+      <div
+        className={`fixed top-0 left-0 h-full w-72 bg-[#0d1526] border-r border-white/10 z-[70] flex flex-col p-6 md:hidden transition-transform duration-300 ${
+          mobileOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <div className="flex justify-between items-center mb-10">
+          <h1 className="text-xl font-black tracking-tighter text-white" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+            DEV<span className="text-cyan-400">GAMER</span>
+          </h1>
+          <button
+            onClick={() => setMobileOpen(false)}
+            className="text-slate-400 hover:text-white text-2xl leading-none"
+          >
+            ✕
+          </button>
+        </div>
+        <nav className="space-y-2 flex-1">
+          <button
+            onClick={() => { setActiveTab('overview'); setMobileOpen(false); }}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl border font-bold text-sm transition ${
+              activeTab === 'overview'
+                ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20'
+                : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <LayoutDashboard className="h-4 w-4" />
+            Dashboard
+          </button>
+          <button
+            onClick={() => { setActiveTab('podcasts'); setMobileOpen(false); }}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl border font-bold text-sm transition ${
+              activeTab === 'podcasts'
+                ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20'
+                : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <Mic2 className="h-4 w-4" />
+            Podcasts
+          </button>
+        </nav>
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-4 py-3 text-red-400 hover:bg-red-500/10 rounded-xl transition text-sm font-bold"
+        >
+          <LogOut className="h-4 w-4" />
+          Cerrar Sesión
+        </button>
+      </div>
+
+      {/* ── WRAPPER: sidebar + main en desktop ── */}
+      <div className="flex flex-1">
       {/* Modal para Nuevo/Editar Episodio */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
@@ -400,6 +477,7 @@ export default function AdminDashboard() {
           </div>
         )}
       </main>
+      </div> {/* cierra el flex wrapper desktop */}
 
       {/* Visor de Imagen Full-Screen */}
       {previewImage && (

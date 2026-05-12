@@ -14,6 +14,8 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 
+import { useLocation } from "wouter";
+
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
@@ -30,12 +32,10 @@ function Router() {
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
 function App() {
+  const [location] = useLocation();
+  const isAdminPage = location.toLowerCase().includes("admin");
+
   return (
     <ErrorBoundary>
       <LanguageProvider>
@@ -47,14 +47,13 @@ function App() {
             <TooltipProvider>
               <Toaster />
               <Router />
-              <ChatBot />
+              {!isAdminPage && <ChatBot />}
             </TooltipProvider>
           </AuthProvider>
         </ThemeProvider>
       </LanguageProvider>
     </ErrorBoundary>
   );
-
 }
 
 export default App;
