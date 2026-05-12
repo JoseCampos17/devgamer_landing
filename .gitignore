@@ -34,7 +34,8 @@ pnpm-debug.log*
 *.sw?
 
 # Project specific
-.gemini/
-src/
-client/dist/
-client/node_modules/
+/.gemini/
+/src/
+/client/dist/
+/client/node_modules/
+/.manus-logs/

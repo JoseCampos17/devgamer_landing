@@ -47,7 +47,7 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
-    if (authLoading) return; // Esperar a que AuthContext cargue desde localStorage
+    if (authLoading) return; 
     if (!isAuthenticated) {
       setLocation('/admin-login');
       return;
@@ -58,7 +58,7 @@ export default function AdminDashboard() {
   const handleLogout = () => {
     logout();
     setLocation('/admin-login');
-    toast.success('Sesión cerrada correctamente');
+    toast.success('Sesion cerrada correctamente');
   };
 
   const handleSaveEpisode = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -74,7 +74,7 @@ export default function AdminDashboard() {
             'Content-Type': 'multipart/form-data'
           }
         });
-        toast.success('Episodio actualizado con éxito');
+        toast.success('Episodio actualizado con exito');
       } else {
         await axios.post(`${API_URL}/episodes`, formData, {
           headers: { 
@@ -88,7 +88,7 @@ export default function AdminDashboard() {
       setEditingEpisode(null);
       fetchData();
     } catch (err) {
-      toast.error('Error al guardar: verifica tu conexión o archivos');
+      toast.error('Error al guardar: verifica tu conexion o archivos');
       console.error(err);
     } finally {
       setFormLoading(false);
@@ -131,13 +131,13 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-[#070b14] text-white flex flex-col relative">
 
-      {/* ── TOPBAR MÓVIL con hamburguesa ── */}
+      {/* TOPBAR MOVIL con hamburguesa */}
       <header className="md:hidden sticky top-0 z-50 flex items-center justify-between px-4 py-3 bg-[#0d1526] border-b-2 border-cyan-500/60">
         <span className="text-cyan-400 font-black tracking-widest text-lg" style={{ fontFamily: "'Orbitron', sans-serif" }}>DEVGAMER</span>
         <button
           onClick={() => setMobileOpen(true)}
           className="flex flex-col justify-center gap-[5px] w-10 h-10 items-center rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/50 transition"
-          aria-label="Abrir menú"
+          aria-label="Abrir menu"
         >
           <span className="block w-5 h-0.5 bg-cyan-400 rounded"/>
           <span className="block w-5 h-0.5 bg-cyan-400 rounded"/>
@@ -145,7 +145,7 @@ export default function AdminDashboard() {
         </button>
       </header>
 
-      {/* ── OVERLAY ── */}
+      {/* OVERLAY */}
       {mobileOpen && (
         <div
           className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[60] md:hidden"
@@ -153,7 +153,7 @@ export default function AdminDashboard() {
         />
       )}
 
-      {/* ── DRAWER LATERAL MÓVIL ── */}
+      {/* DRAWER LATERAL MOVIL */}
       <div
         className={`fixed top-0 left-0 h-full w-72 bg-[#0d1526] border-r border-white/10 z-[70] flex flex-col p-6 md:hidden transition-transform duration-300 ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
@@ -167,7 +167,7 @@ export default function AdminDashboard() {
             onClick={() => setMobileOpen(false)}
             className="text-slate-400 hover:text-white text-2xl leading-none"
           >
-            ✕
+            x
           </button>
         </div>
         <nav className="space-y-2 flex-1">
@@ -199,114 +199,12 @@ export default function AdminDashboard() {
           className="w-full flex items-center gap-3 px-4 py-3 text-red-400 hover:bg-red-500/10 rounded-xl transition text-sm font-bold"
         >
           <LogOut className="h-4 w-4" />
-          Cerrar Sesión
+          Cerrar Sesion
         </button>
       </div>
 
-      {/* ── WRAPPER: sidebar + main en desktop ── */}
       <div className="flex flex-1">
-      {/* Modal para Nuevo/Editar Episodio */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="bg-[#0f172a] border border-white/10 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-auto shadow-2xl">
-            <div className="p-8">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-bold" style={{ fontFamily: "'Orbitron', sans-serif" }}>
-                  {editingEpisode ? 'EDITAR' : 'NUEVO'} <span className="text-cyan-400">EPISODIO</span>
-                </h3>
-                <button onClick={() => { setIsModalOpen(false); setEditingEpisode(null); }} className="text-slate-400 hover:text-white transition">✕</button>
-              </div>
-
-              <form onSubmit={handleSaveEpisode} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-slate-400 mb-2">Título del Episodio</label>
-                    <input name="title" required defaultValue={editingEpisode?.title} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" placeholder="Ej: Introducción al Gaming" />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-slate-400 mb-2">Temporada</label>
-                    <input name="season" type="number" defaultValue={editingEpisode?.season || "1"} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-slate-400 mb-2">Nº Episodio</label>
-                    <input name="episode_number" type="number" defaultValue={editingEpisode?.episode_number} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-slate-400 mb-2">Duración</label>
-                    <input name="duration" defaultValue={editingEpisode?.duration} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" placeholder="Ej: 45 min" />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-slate-400 mb-2">Tono/Categoría</label>
-                    <input name="tone" defaultValue={editingEpisode?.tone} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" placeholder="Ej: Entrevista" />
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-slate-400 mb-2">Descripción</label>
-                    <textarea name="description" rows={3} defaultValue={editingEpisode?.description} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" placeholder="De qué trata este episodio..." />
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-slate-400 mb-2">Archivo de Audio</label>
-                    <input name="audio" type="file" accept="audio/*" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-cyan-500/10 file:text-cyan-400 hover:file:bg-cyan-500/20" />
-                    {editingEpisode?.audio_url && <p className="text-[10px] text-slate-500 mt-1 truncate">Actual: {editingEpisode.audio_url}</p>}
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-slate-400 mb-2">Imagen de Portada (Miniatura)</label>
-                    <input name="image" type="file" accept="image/*" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-500/10 file:text-violet-400 hover:file:bg-violet-500/20" />
-                    {editingEpisode?.image_url && <p className="text-[10px] text-slate-500 mt-1 truncate">Actual: {editingEpisode.image_url}</p>}
-                  </div>
-                </div>
-
-                <div className="flex justify-end gap-4 pt-4">
-                  <button type="button" onClick={() => { setIsModalOpen(false); setEditingEpisode(null); }} className="px-6 py-2.5 text-slate-400 hover:text-white transition">Cancelar</button>
-                  <button type="submit" disabled={formLoading} className="bg-cyan-500 hover:bg-cyan-400 text-[#070b14] font-black px-8 py-2.5 rounded-xl transition flex items-center gap-2">
-                    {formLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : editingEpisode ? 'GUARDAR CAMBIOS' : 'PUBLICAR AHORA'}
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Modal de Confirmación de Eliminación */}
-      {isDeleteModalOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="bg-[#0f172a] border border-red-500/20 rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden">
-            <div className="p-6 text-center">
-              <div className="h-16 w-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-red-500/20">
-                <AlertCircle className="h-8 w-8 text-red-500" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">¿Estás seguro?</h3>
-              <p className="text-slate-400 text-sm mb-6">
-                Vas a eliminar el episodio <span className="text-white font-bold">"{episodeToDelete?.title}"</span>. Esta acción no se puede deshacer.
-              </p>
-              <div className="flex gap-3">
-                <button 
-                  onClick={() => setIsDeleteModalOpen(false)}
-                  className="flex-1 px-4 py-2.5 bg-white/5 hover:bg-white/10 rounded-xl transition font-bold text-sm"
-                >
-                  Cancelar
-                </button>
-                <button 
-                  onClick={handleDelete}
-                  className="flex-1 px-4 py-2.5 bg-red-500 hover:bg-red-400 text-white rounded-xl transition font-bold text-sm flex items-center justify-center gap-2"
-                >
-                  <Trash2 className="h-4 w-4" />
-                  Eliminar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Sidebar */}
+      {/* Sidebar Escritorio */}
       <aside className="w-64 border-r border-white/10 p-6 hidden md:flex flex-col">
         <div className="mb-10">
           <h1 className="text-xl font-black tracking-tighter" style={{ fontFamily: "'Orbitron', sans-serif" }}>
@@ -346,7 +244,7 @@ export default function AdminDashboard() {
             className="w-full flex items-center gap-3 px-4 py-3 text-red-400 hover:bg-red-500/10 rounded-xl transition text-sm font-bold"
           >
             <LogOut className="h-4 w-4" />
-            Cerrar Sesión
+            Cerrar Sesion
           </button>
         </div>
       </aside>
@@ -357,14 +255,13 @@ export default function AdminDashboard() {
           <div>
             <h2 className="text-2xl font-bold">Bienvenido, {user?.name}</h2>
             <p className="text-slate-400">
-              {activeTab === 'overview' ? 'Aquí tienes un resumen de tu contenido.' : 'Gestiona tus episodios de podcast.'}
+              {activeTab === 'overview' ? 'Aqui tienes un resumen de tu contenido.' : 'Gestiona tus episodios de podcast.'}
             </p>
           </div>
         </header>
 
         {activeTab === 'overview' ? (
           <>
-            {/* Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
               <StatCard 
                 icon={<Mic2 className="h-6 w-6 text-cyan-400" />} 
@@ -386,7 +283,6 @@ export default function AdminDashboard() {
               />
             </div>
 
-            {/* Status Card */}
             <div className="bg-[#0f172a] border border-white/10 rounded-2xl p-8">
               <h3 className="text-lg font-bold mb-4 text-cyan-400">Estado del Sistema</h3>
               <div className="flex items-center gap-3 text-emerald-400 text-sm font-medium bg-emerald-500/5 p-4 rounded-xl border border-emerald-500/10">
@@ -415,7 +311,7 @@ export default function AdminDashboard() {
                     <th className="px-6 py-4">Imagen</th>
                     <th className="px-6 py-4">Episodio</th>
                     <th className="px-6 py-4 text-center">Temp.</th>
-                    <th className="px-6 py-4">Duración</th>
+                    <th className="px-6 py-4">Duracion</th>
                     <th className="px-6 py-4">Estatus</th>
                     <th className="px-6 py-4 text-right">Acciones</th>
                   </tr>
@@ -464,22 +360,14 @@ export default function AdminDashboard() {
                       </td>
                     </tr>
                   ))}
-                  {episodes.length === 0 && (
-                    <tr>
-                      <td colSpan={5} className="px-6 py-12 text-center text-slate-500">
-                        No hay episodios registrados. ¡Crea el primero!
-                      </td>
-                    </tr>
-                  )}
                 </tbody>
               </table>
             </div>
           </div>
         )}
       </main>
-      </div> {/* cierra el flex wrapper desktop */}
+      </div>
 
-      {/* Visor de Imagen Full-Screen */}
       {previewImage && (
         <div 
           className="fixed inset-0 z-[70] flex items-center justify-center p-8 bg-black/90 backdrop-blur-md cursor-zoom-out"
@@ -490,7 +378,7 @@ export default function AdminDashboard() {
               className="absolute -top-12 right-0 text-white hover:text-cyan-400 transition flex items-center gap-2 font-bold"
               onClick={() => setPreviewImage(null)}
             >
-              CERRAR ✕
+              CERRAR x
             </button>
             <img 
               src={previewImage} 
